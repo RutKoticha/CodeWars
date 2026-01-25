@@ -38,11 +38,8 @@ public:
     // Go till the number is reached 0 or k runs out
     while (index < num.size() && k)
     {
-      printf("Processing %c,\n", num.at(index));
-
       if (num.at(index) < stack.top())
       {
-        printf("Popping from stack\n");
         stack.pop();
         k--;
       }
@@ -60,11 +57,13 @@ public:
 
     // Keep going until k is done
     while (!stack.empty() && k)
+    {
       stack.pop();
+      k--;
+    }
 
     // Construct the number remaining
     std::stack<char> reverser;
-    std::string digits(std::max(stack.size(), size_t(1)), '0');
 
     while (!stack.empty())
     {
@@ -76,12 +75,15 @@ public:
       reverser.pop();
 
     index = 0;
+    std::string digits(std::max(reverser.size(), size_t(1)), '0');
     while (!reverser.empty())
     {
       digits.at(index) = reverser.top();
+      reverser.pop();
       index++;
     }
 
     return digits;
   }
 };
+  
