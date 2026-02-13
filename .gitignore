@@ -1,41 +1,45 @@
-# Prerequisites
-*.d
+# --- Premake & Build System Trash ---
+# Ignore the actual project files Premake generates (keep the .lua, kill the rest)
+Makefile
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.make
 
-# Compiled Object files
-*.slo
-*.lo
+# --- Compiled Binaries & Objects ---
+# These are the "Muscle" results you don't need to track
+bin/
+bin-int/
+obj/
 *.o
 *.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
 *.exe
 *.out
 *.app
 
-# Code Runner Temp File
-tempCodeRunnerFile.*
+# --- VS Code & IDE Metadata ---
+# We keep tasks.json/launch.json usually, but ignore the workspace bloat
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+*.code-workspace
+.browse.VC.db
+.visualstudio/
 
-# No need to save .cph files
-.cph
+# --- Operating System Junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# No need to save the .vscode folder
-.vscode/
+# --- Debugger & Profiling ---
+# Since you're into memory profiling, ignore the logs
+*.log
+*.tlog
+*.lastbuildstate
+*.idb
+*.pdb
+gmon.out
+core
