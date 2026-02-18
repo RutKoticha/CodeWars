@@ -1,7 +1,7 @@
 /**
  * @file 150_Evaluate_Reverse_Polish_Notation.cpp
  * @author Rut Koticha
- * @date 2025-12-17
+ * @date 2026-02-14
  */
 
 #include <vector>
@@ -9,66 +9,59 @@
 #include <stack>
 
 class Solution {
-private:
-  std::stack<int> stack;
-
-private:
-  bool IsOperator(std::string value)
+  bool IsValidOperator(std::string token)
   {
-    switch (value[0])
+    bool isTokenLengthNot1 = token.length() - 1;
+    if (isTokenLengthNot1)
+      return false;
+
+    switch (token.front())
     {
     case '+':
     case '-':
     case '*':
     case '/':
       return true;
+
     default:
       return false;
-
     }
   }
 
-  int Operate(int operand1, int operand2, char op)
+  int Operate(std::string token, int operand1, int operand2)
   {
-    switch (op)
+    switch (token.front())
     {
-    case '+':
-      return operand1 + operand2;
-    case '-':
-      return operand1 - operand2;
-    case '*':
-      return operand1 * operand2;
-    case '/':
-      return operand1 / operand2;
+    case '+': return operand1 + operand2;
+    case '-': return operand1 - operand2;
+    case '*': return operand1 * operand2;
+    case '/': return operand1 / operand2;
+    default: return -1;
     }
-
-    return -1;
   }
 
 public:
   int evalRPN(std::vector<std::string>& tokens)
   {
-    for (std::string token : tokens)
+    std::stack<int> operandStack;
+
+    for (std::string& token : tokens)
     {
-      if (IsOperator(token))
+      if (IsValidOperator(token))
       {
-        int operand2 = stack.top();
-        stack.pop();
+        int operand2 = operandStack.top();
+        operandStack.pop();
+        int operand1 = operandStack.top();
+        operandStack.pop();
 
-        int operand1 = stack.top();
-        stack.pop();
-
-        int answer = Operate(operand1, operand2, token[0]);
-        stack.push(answer);
-        printf("%s %s %s = %s\n", operand1, operand2, token, answer);
+        operandStack.push(Operate(token, operand1, operand2));
       }
       else
       {
-        stack.push(std::stoi(token));
-        printf("Operand : %d\n", stack.top());
+        operandStack.push(std::stoi(token));
       }
     }
 
-    return stack.top();
+    return operandStack.top();
   }
 };
