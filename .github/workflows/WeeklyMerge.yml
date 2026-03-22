@@ -1,0 +1,59 @@
+name: Weekly Knowledge Consolidation
+
+on:
+  schedule:
+    # 10 PM IST corresponds to 16:30 UTC
+    - cron: '30 16 * * 0'
+  workflow_dispatch:
+
+jobs:
+  merge-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Identity
+        run: |
+          git config user.name "Scholar-Bot"
+          git config user.email "bot@github.com"
+
+      - name: Consolidate Solutions
+        id: merge_step
+        run: |
+          branches=(
+            "solutions/leetcode"
+            "solutions/codeforces"
+            "solutions/codechef"
+            "solutions/codewars"
+          )
+
+          git checkout main
+          
+          for branch in "${branches[@]}"; do
+            echo "Integrating $branch into main..."
+            if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+              git merge "origin/$branch" --no-edit || exit 1
+            else
+              echo "Branch $branch not found. Skipping."
+            fi
+          done
+
+      - name: Push Changes to Main
+        if: success()
+        run: git push origin main
+
+      - name: Send Failure Notification
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "CRITICAL: Branch Consolidation Failed"
+          to: koticharut@gmail.com
+          from: GitHub Actions Scholar
+          body: "The weekly merge to main has failed due to conflicts. Manual intervention is required."
