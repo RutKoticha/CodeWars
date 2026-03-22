@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Premake: Generate",
+      "type": "shell",
+      "command": "premake5 gmake2",
+      "options": {
+        "env": {
+          "ACTIVE_CPP_FILE": "${relativeFile}"
+        }
+      },
+      "group": "build"
+    },
+    {
+      "label": "Build Solution",
+      "type": "shell",
+      "command": "make config=debug",
+      "dependsOn": "Premake: Generate",
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

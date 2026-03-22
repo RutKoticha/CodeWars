@@ -1,45 +1,167 @@
-# --- Premake & Build System Trash ---
-# Ignore the actual project files Premake generates (keep the .lua, kill the rest)
+# ===============================================
+# CodeWars - Competitive Programming Workspace
+# ===============================================
+
+# --- Premake5 Generated Files ---
+# Keep premake5.lua, ignore everything it generates
 Makefile
 *.sln
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
+*.workspace
 *.make
+*.xcodeproj/
+*.xcworkspace/
 
-# --- Compiled Binaries & Objects ---
-# These are the "Muscle" results you don't need to track
+# --- Build Output Directories ---
 bin/
 bin-int/
+build/
 obj/
+out/
+target/
+
+# --- Compiled Object Files & Executables ---
 *.o
 *.obj
 *.exe
 *.out
 *.app
+*.elf
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
 
-# --- VS Code & IDE Metadata ---
-# We keep tasks.json/launch.json usually, but ignore the workspace bloat
-.vscode/*
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/
-*.code-workspace
-.browse.VC.db
-.visualstudio/
+# --- Preprocessor & Assembly Output ---
+*.i
+*.ii
+*.s
+*.asm
 
-# --- Operating System Junk ---
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# --- Debugger & Profiling ---
-# Since you're into memory profiling, ignore the logs
+# --- Debugger & Profiler Data ---
 *.log
 *.tlog
 *.lastbuildstate
 *.idb
 *.pdb
+*.ilk
+*.dSYM/
 gmon.out
+perf.data
+callgrind.out.*
+cachegrind.out.*
+massif.out.*
+vgcore.*
 core
+core.*
+
+# --- VS Code Workspace ---
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/settings.json
+.history/
+*.code-workspace
+
+# --- Visual Studio ---
+.vs/
+.visualstudio/
+.vscode-test/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+.browse.VC.db
+
+# --- CLion / JetBrains IDEs ---
+.idea/
+cmake-build-*/
+*.iml
+
+# --- Xcode ---
+xcuserdata/
+*.xccheckout
+
+# --- Compilation Database ---
+compile_commands.json
+
+# --- Test Input/Output Files ---
+# Ignore common competitive programming test files
+input.txt
+output.txt
+answer.txt
+test.txt
+*.in
+*.out
+.cph/
+# Exception: if you version control test cases, uncomment these:
+# !**/tests/*.in
+# !**/tests/*.out
+
+# --- Temporary Problem Files ---
+temp.cpp
+tmp.cpp
+test.cpp
+scratch.cpp
+a.out
+a.exe
+solution
+Solution
+
+# --- Operating System Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# --- Editor Backups & Swap Files ---
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+*.temp
+.*.swp
+.*.swo
+
+# --- Package Managers (if you use any) ---
+node_modules/
+.npm
+.yarn/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# --- Documentation Build Output ---
+docs/_build/
+*.pdf
+# Exception: keep explicitly named documentation
+!README.pdf
+!Readme.pdf
+
+# --- Compressed Archives ---
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# --- Miscellaneous ---
+*.stackdump
+*.orig
+.cache/
+.ccls-cache/
+.clangd/
